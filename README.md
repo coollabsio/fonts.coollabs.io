@@ -1,1 +1,1 @@
-Landing page of [coollabs.io](https://coollabs.io) - work in progress.
+Landing page of [fonts.coollabs.io](https://fonts.coollabs.io).
