@@ -6,6 +6,10 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://fonts.coollabs.io",
+  trailingSlash: "never",
+  build: {
+    format: "file"
+  },
   vite: {
     optimizeDeps: {
       include: ['lodash.get', 'lodash.isequal', 'lodash.clonedeep']
