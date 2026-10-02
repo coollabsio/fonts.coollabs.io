@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Geist Sans";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/geist-sans-variable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/geist-mono-variable.woff2") format("woff2");
+}
+
+@theme {
+  --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Graphite design language, shared with the Coolify app (see DESIGN.md in
+     coollabsio/coolify). Pure neutral surfaces + translucent hairlines. */
+  --color-app: oklch(14.48% 0 0);
+  --color-panel: oklch(19.13% 0 0);
+  --color-surface: oklch(20.02% 0 0);
+  --color-raised: oklch(22.64% 0 0);
+  --color-selected: oklch(26.86% 0 0);
+  --color-fg: oklch(96.12% 0 0);
+  --color-fg-dim: oklch(76.99% 0 0);
+  --color-fg-faint: oklch(59.31% 0 0);
+  --color-hairline: oklch(100% 0 0 / 0.08);
+
+  /* Accent is blue here (matches the coolLabs Fonts logo) instead of Coolify purple. */
+  --color-coollabs: oklch(54.6% 0.245 262.881);
+  --color-coollabs-50: oklch(97% 0.014 254.604);
+  --color-coollabs-100: oklch(58% 0.23 261);
+  --color-coollabs-200: oklch(48.8% 0.243 264.376);
+  --color-coollabs-300: oklch(42.4% 0.199 265.638);
+  --color-coolblack: oklch(14.48% 0 0);
+  --color-coolgray-100: oklch(20.9% 0 0);
+  --color-coolgray-200: oklch(24.35% 0 0);
+  --color-coolgray-300: oklch(26.03% 0 0);
+  --color-coolgray-400: oklch(27.68% 0 0);
+  --color-coolgray-500: oklch(31.71% 0 0);
+  --color-primary: oklch(54.6% 0.245 262.881);
+  --color-secondary: oklch(58% 0.23 261);
+  --color-accent: oklch(88.13% 0.1507 91.7);
+  --color-info: #2563eb;
+  --color-success: oklch(72.27% 0.192 149.58);
+  --color-warning: oklch(88.13% 0.1507 91.7);
+  --color-error: oklch(57.71% 0.2152 27.33);
+  --color-base-100: oklch(14.48% 0 0);
+  --color-base-200: oklch(19.13% 0 0);
+  --color-base-300: oklch(22.64% 0 0);
+  --color-base-content: oklch(96.12% 0 0);
+  --color-neutral: oklch(26.03% 0 0);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+}
+
+@layer components {
+  /* Compact button with a 2px bottom edge, same as the app's .button. */
+  .btn {
+    @apply inline-flex h-9 items-center justify-center gap-2 rounded-md px-4 text-sm font-medium whitespace-nowrap transition-[transform,box-shadow,background-color] duration-[80ms] ease-(--ease-out) focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-warning;
+    box-shadow: var(--btn-ring, 0 0 #0000), 0 2px 0 var(--btn-edge, rgb(255 255 255 / 0.08));
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--btn-ring, 0 0 #0000), 0 3px 0 var(--btn-edge, rgb(255 255 255 / 0.08));
+  }
+  .btn:active {
+    transform: translateY(2px);
+    box-shadow: var(--btn-ring, 0 0 #0000);
+  }
+  .btn-primary {
+    @apply bg-coollabs text-white hover:bg-coollabs-100;
+    --btn-edge: var(--color-coollabs-300);
+  }
+  .btn-neutral {
+    @apply bg-white/[0.06] text-fg hover:bg-white/[0.09];
+    /* Hairline ring lives in the .btn shadow stack; a ring utility would replace the depth edge. */
+    --btn-ring: inset 0 0 0 1px var(--color-hairline);
+  }
+  .btn-lg {
+    @apply h-10 px-5;
+  }
+
+  /* Card on the canvas: subtle fill + crisp hairline ring. */
+  .card {
+    @apply rounded-lg bg-white/[0.04] ring-1 ring-hairline;
+  }
+
+  .eyebrow {
+    @apply text-xs font-medium tracking-wide text-fg-faint uppercase;
+  }
+}

@@ -1,70 +1,168 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import BigSponsors from "./big-sponsors.astro";
+import Icon from "../components/Icon.astro";
+import ArrowRight from "reicon/icons/ArrowRight";
+import Book from "reicon/icons/Book";
+import Check from "reicon/icons/Check";
+import Code from "reicon/icons/Code";
+import Copy from "reicon/icons/Copy";
+import EyeSlash from "reicon/icons/EyeSlash";
+import Flash from "reicon/icons/Flash";
+import HeartHand from "reicon/icons/HeartHand";
+import Repeat from "reicon/icons/Repeat";
+import Shapes from "reicon/icons/Shapes";
+import ShieldCheck from "reicon/icons/ShieldCheck";
+
+const features = [
+  {
+    icon: EyeSlash,
+    title: "No logging",
+    text: "The API does not log anything. No IP addresses, no browser agents, no request details.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "GDPR friendly",
+    text: "Font requests do not go to Google, so your visitors' details stay away from Google's servers.",
+  },
+  {
+    icon: Repeat,
+    title: "Drop-in replacement",
+    text: "Supports the css2 and css API endpoints of Google Fonts. Change one domain and you are done.",
+  },
+  {
+    icon: Shapes,
+    title: "Material Icons",
+    text: "Material Icons are available too. Use the same domain swap for the icon endpoint.",
+  },
+  {
+    icon: Flash,
+    title: "Fast CDN",
+    text: "Font files are served from BunnyCDN, with logging disabled on their side completely.",
+  },
+  {
+    icon: Code,
+    title: "Open source",
+    text: "The API is a small open-source HTTP server, self-hosted with Coolify on a Hetzner server.",
+  },
+];
+
+const fontUrl = "/css2?family=Roboto&display=swap";
 ---
 
 <Layout title="coolLabs Fonts">
-  <h1 class="text-3xl font-bold tracking-tight text-white md:text-6xl px-4">
-    Privacy for your visitors<span class="text-warning">.</span>
-  </h1>
-  <h2 class="text-base pt-2 text-neutral-400 px-4">
-    A privacy-friendly drop-in replacement for Google Fonts.
-  </h2>
-  <div
-    class="pb-6 pt-4 text-xs flex gap-2 gap-2 justify-center flex-row flex-wrap"
-  >
+  <section class="px-4">
     <a
-      class="text-white hover:underline cursor-pointer text-white flex gap-2 items-center justify-center text-xs"
-      target="_blank"
-      href="https://twitch.tv/heyandras"
+      href="/philosophy"
+      class="inline-flex items-center gap-2 rounded-full bg-white/[0.04] px-3 py-1 text-xs text-fg-dim ring-1 ring-hairline transition-colors hover:text-fg hover:bg-white/[0.07]"
     >
-      <i class="ph-duotone ph-twitch-logo text-purple-500 text-base" aria-hidden="true"></i>
+      <span class="size-1.5 rounded-full bg-warning"></span>
+      Open source and free forever. Read our philosophy
+      <Icon icon={ArrowRight} class="size-3.5" />
+    </a>
+    <h1 class="mx-auto mt-6 max-w-3xl text-4xl font-semibold tracking-tight text-balance text-fg md:text-6xl">
+      Privacy for your visitors<span class="text-warning">.</span>
+    </h1>
+    <p class="mx-auto mt-5 max-w-2xl text-base text-pretty text-fg-dim md:text-lg">
+      A privacy-friendly drop-in replacement for Google Fonts. Same fonts, same
+      API, without logging anything about your visitors.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="https://github.com/coollabsio/fonts#how-to-use" target="_blank" class="btn btn-primary btn-lg">
+        <Icon icon={Book} class="size-4" />
+        How to use
+      </a>
+      <a href="https://github.com/coollabsio/fonts" target="_blank" class="btn btn-neutral btn-lg">
+        <Icon icon={Code} class="size-4" />
+        View source
+      </a>
+    </div>
+    <div class="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-fg-faint">
+      <span><span class="font-mono text-fg tabular-nums">7,000,000+</span> monthly requests</span>
+      <span><span class="font-mono text-fg">Millions</span> of users protected</span>
+    </div>
+    <div class="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-fg-faint">
+      <a class="hover:text-fg transition-colors" target="_blank" href="https://twitch.tv/heyandras">Building in live streams</a>
+      <a class="hover:text-fg transition-colors" href="#features">Features</a>
+    </div>
+  </section>
 
-      Building in live-streams</a
-    >
-  </div>
-  <div
-    class="flex flex-col md:flex-row gap-4 text-center items-center justify-center"
-  >
-    <div class="text-base font-extrabold tracking-tight text-white">
-      In your <span class="font-bold text-warning">head</span> tags, change:
+  <section id="how-it-works" class="mx-auto mt-20 max-w-4xl scroll-mt-20 px-4">
+    <div class="rounded-xl bg-white/[0.03] p-1.5 text-left ring-1 ring-hairline">
+      <div class="flex items-center justify-between px-3 py-2">
+        <span class="font-mono text-xs text-fg-faint">index.html</span>
+        <button
+          id="copy-snippet"
+          type="button"
+          class="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-fg-dim transition-colors hover:bg-white/[0.06] hover:text-fg focus-visible:outline-1 focus-visible:outline-warning"
+        >
+          <span data-copy-idle class="inline-flex items-center gap-1.5"><Icon icon={Copy} class="size-3.5" />Copy</span>
+          <span data-copy-done class="hidden items-center gap-1.5 text-success"><Icon icon={Check} class="size-3.5" />Copied</span>
+        </button>
+      </div>
+      <pre class="overflow-x-auto rounded-lg bg-app/70 p-4 font-mono text-[13px] leading-6 ring-1 ring-hairline"><code><span class="block text-fg-faint"><span class="select-none text-error">- </span>&lt;link href="https://<span class="rounded bg-error/15 px-0.5 text-error">fonts.googleapis.com</span>{fontUrl}" rel="stylesheet" /&gt;</span><span class="block text-fg"><span class="select-none text-success">+ </span><span id="snippet">&lt;link href="https://<span class="rounded bg-success/15 px-0.5 text-success">api.fonts.coollabs.io</span>{fontUrl}" rel="stylesheet" /&gt;</span></span></code></pre>
     </div>
-    <div
-      class="tracking-tight text-white font-mono bg-coolgray-300 px-4 py-2 rounded text-sm"
-    >
-      fonts.googleapis.com
+    <p class="mt-4 text-sm text-fg-faint">
+      In your <code class="font-mono text-fg-dim">&lt;head&gt;</code> tags, change
+      <code class="font-mono text-fg-dim">fonts.googleapis.com</code> to
+      <code class="font-mono text-fg-dim">api.fonts.coollabs.io</code>. That's all<span class="text-warning">!</span>
+    </p>
+  </section>
+
+  <section id="features" class="mt-28 scroll-mt-20 px-4">
+    <p class="eyebrow">Features</p>
+    <h2 class="mt-2 text-2xl font-semibold tracking-tight text-fg md:text-3xl">
+      Google Fonts, without Google
+    </h2>
+    <p class="mx-auto mt-3 max-w-xl text-sm text-fg-faint">
+      We don't know what Google does with your visitors' details. So we built the
+      same service, just without logging anything.
+    </p>
+    <div class="mx-auto mt-10 grid max-w-5xl gap-3 text-left sm:grid-cols-2 lg:grid-cols-3">
+      {features.map((feature) => (
+        <div class="card p-5">
+          <div class="flex size-9 items-center justify-center rounded-md bg-coollabs/15 text-blue-400 ring-1 ring-coollabs/30">
+            <Icon icon={feature.icon} class="size-4.5" />
+          </div>
+          <h3 class="mt-4 text-sm font-medium text-fg">{feature.title}</h3>
+          <p class="mt-1.5 text-sm text-fg-faint">{feature.text}</p>
+        </div>
+      ))}
     </div>
-    <div class="text-base font-extrabold tracking-tight text-white">to:</div>
-    <div class="flex justify-center">
-      <div
-        class="tracking-tight text-white font-mono bg-coolgray-300 px-4 py-2 rounded text-sm"
-      >
-        api.fonts.coollabs.io
+  </section>
+
+  <section class="mx-auto mt-28 max-w-3xl px-4">
+    <div class="card flex flex-col items-center gap-4 px-6 py-10">
+      <div class="flex size-10 items-center justify-center rounded-md bg-white/[0.06] text-pink-400 ring-1 ring-hairline">
+        <Icon icon={HeartHand} class="size-5" />
+      </div>
+      <h2 class="text-xl font-semibold tracking-tight text-fg md:text-2xl">
+        Free, because of our sponsors
+      </h2>
+      <p class="max-w-lg text-sm text-pretty text-fg-faint">
+        No ads and no investors. If coolLabs Fonts helps you, please
+        support the project to keep it free for everyone.
+      </p>
+      <div class="mt-2 flex flex-wrap justify-center gap-3">
+        <a href="/sponsorships" class="btn btn-primary">Sponsor us</a>
+        <a href="/philosophy" class="btn btn-neutral">Our philosophy</a>
       </div>
     </div>
-  </div>
-  <div
-    class="text-base font-extrabold tracking-tight text-white sm:text-2xl pt-6"
-  >
-    That's all!
-  </div>
-  <div>
-    <a
-      href="https://github.com/coollabsio/fonts#how-to-use"
-      target="_blank"
-      class="tracking-tight text-gray-300 text-xs underline hover:text-white"
-      >(see an example)</a
-    >
-  </div>
+  </section>
 
-  <div class="pt-16 pb-8 px-4 flex gap-4 justify-center flex-wrap">
-    <div class="rounded-xl border border-coolgray-400 bg-coolgray-200 py-8 px-12 flex-1 max-w-xs">
-      <div class="text-3xl md:text-4xl font-extrabold text-white tabular-nums">7,000,000+</div>
-      <div class="text-sm text-neutral-500 pt-2">Monthly Requests</div>
-    </div>
-    <div class="rounded-xl border border-coolgray-400 bg-coolgray-200 py-8 px-12 flex-1 max-w-xs">
-      <div class="text-3xl md:text-4xl font-extrabold text-white">Millions</div>
-      <div class="text-sm text-neutral-500 pt-2">Users Protected</div>
-    </div>
-  </div>
+  <script>
+    const button = document.getElementById("copy-snippet");
+    const snippet = document.getElementById("snippet");
+    button?.addEventListener("click", async () => {
+      if (!snippet?.textContent) return;
+      await navigator.clipboard.writeText(snippet.textContent);
+      const idle = button.querySelector("[data-copy-idle]");
+      const done = button.querySelector("[data-copy-done]");
+      idle?.classList.add("hidden");
+      done?.classList.replace("hidden", "inline-flex");
+      setTimeout(() => {
+        idle?.classList.remove("hidden");
+        done?.classList.replace("inline-flex", "hidden");
+      }, 1500);
+    });
+  </script>
 </Layout>
